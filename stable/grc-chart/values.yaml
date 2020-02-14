@@ -17,11 +17,11 @@ nodeSelector:
   os: ""
   customLabelSelector: ""
   customLabelValue: ""
-
+imageTagPostfix: ""
 cfcRouterUrl: null
 
 compliance:
-  repository: ibmcom/mcm-compliance
+  repository: quay.io/open-cluster-management/mcm-compliance
   tag: 3.5.0
   pullPolicy: Always
   resources:
@@ -33,7 +33,7 @@ compliance:
       cpu: "100m"
 grcui:
   image:
-    repository: ibmcom/grc-ui
+    repository: quay.io/open-cluster-management/grc-ui
     tag: 3.5.0
     pullPolicy: Always
   resources:
@@ -45,7 +45,7 @@ grcui:
       cpu: "500m"
 grcuiapi:
   image:
-    repository: ibmcom/grc-ui-api
+    repository: quay.io/open-cluster-management/grc-ui-api
     tag: 3.5.0
     pullPolicy: Always
   resources:

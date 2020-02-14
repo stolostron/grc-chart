@@ -64,7 +64,7 @@ spec:
           effect: NoSchedule
       containers:
       - name: policy-propagator-controller
-        image: "{{ .Values.compliance.repository }}:{{ .Values.compliance.tag }}"
+        image: "{{ .Values.compliance.repository }}:{{ .Values.compliance.tag }}{{ .Values.imageTagPostfix }}"
         imagePullPolicy: "{{ .Values.compliance.pullPolicy }}"
         resources:
         {{- toYaml .Values.compliance.resources | nindent 10 }}

@@ -64,7 +64,7 @@ spec:
           effect: NoSchedule
       containers:
       - name: grc-ui-api
-        image: "{{ .Values.grcuiapi.image.repository }}:{{ .Values.grcuiapi.image.tag }}"
+        image: "{{ .Values.grcuiapi.image.repository }}:{{ .Values.grcuiapi.image.tag }}{{ .Values.imageTagPostfix }}"
         imagePullPolicy: {{ .Values.grcuiapi.image.pullPolicy }}
         resources:
         {{- toYaml .Values.grcuiapi.resources | nindent 10 }}
