@@ -22,7 +22,7 @@ cfcRouterUrl: null
 
 compliance:
   repository: quay.io/open-cluster-management/mcm-compliance
-  tag: 3.5.0
+  tag: 3.6.0
   pullPolicy: Always
   resources:
     requests:
@@ -34,7 +34,7 @@ compliance:
 grcui:
   image:
     repository: quay.io/open-cluster-management/grc-ui
-    tag: 3.5.0
+    tag: 3.6.0
     pullPolicy: Always
   resources:
     requests:
@@ -46,7 +46,7 @@ grcui:
 grcuiapi:
   image:
     repository: quay.io/open-cluster-management/grc-ui-api
-    tag: 3.5.0
+    tag: 3.6.0
     pullPolicy: Always
   resources:
     requests:
