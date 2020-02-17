@@ -21,9 +21,11 @@ imageTagPostfix: ""
 cfcRouterUrl: null
 
 compliance:
-  repository: quay.io/open-cluster-management/mcm-compliance
-  tag: 3.6.0
-  pullPolicy: Always
+  image:
+    repository: quay.io/open-cluster-management
+    name: mcm-compliance
+    tag: 3.6.0
+    pullPolicy: Always
   resources:
     requests:
       memory: "64Mi"
@@ -33,7 +35,8 @@ compliance:
       cpu: "100m"
 grcui:
   image:
-    repository: quay.io/open-cluster-management/grc-ui
+    repository: quay.io/open-cluster-management
+    name: grc-ui
     tag: 3.6.0
     pullPolicy: Always
   resources:
@@ -45,7 +48,8 @@ grcui:
       cpu: "500m"
 grcuiapi:
   image:
-    repository: quay.io/open-cluster-management/grc-ui-api
+    repository: quay.io/open-cluster-management
+    name: grc-ui-api
     tag: 3.6.0
     pullPolicy: Always
   resources:
