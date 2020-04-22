@@ -6,6 +6,13 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  imageOverrides:
+    mcm_compliance: ""
+    grc_ui: ""
+    grc_ui_api: ""
+  
+
 arch:
   - amd64
   - ppc64le
@@ -21,9 +28,6 @@ imageTagPostfix: ""
 
 compliance:
   image:
-    repository: quay.io/open-cluster-management
-    name: mcm-compliance
-    tag: 3.6.0
     pullPolicy: Always
   resources:
     requests:
@@ -31,9 +35,6 @@ compliance:
       cpu: "25m"
 grcui:
   image:
-    repository: quay.io/open-cluster-management
-    name: grc-ui
-    tag: 3.6.0
     pullPolicy: Always
   resources:
     requests:
@@ -41,15 +42,8 @@ grcui:
       cpu: "200m"
 grcuiapi:
   image:
-    repository: quay.io/open-cluster-management
-    name: grc-ui-api
-    tag: 3.6.0
     pullPolicy: Always
   resources:
     requests:
       memory: "256Mi"
       cpu: "50m"
-imageShaDigests:
-  mcm_compliance: ""
-  grc_ui: ""
-  grc_ui_api: ""
