@@ -11,6 +11,8 @@ global:
     mcm_compliance: ""
     grc_ui: ""
     grc_ui_api: ""
+  image:
+    pullPolicy: Always
   
 
 arch:
@@ -24,25 +26,18 @@ nodeSelector:
   os: ""
   customLabelSelector: ""
   customLabelValue: ""
-imageTagPostfix: ""
 
 compliance:
-  image:
-    pullPolicy: Always
   resources:
     requests:
       memory: "64Mi"
       cpu: "25m"
 grcui:
-  image:
-    pullPolicy: Always
   resources:
     requests:
       memory: "256Mi"
       cpu: "200m"
 grcuiapi:
-  image:
-    pullPolicy: Always
   resources:
     requests:
       memory: "256Mi"

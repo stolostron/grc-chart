@@ -62,7 +62,7 @@ spec:
       containers:
       - name: policy-propagator-controller
         image: {{ .Values.global.imageOverrides.mcm_compliance}}
-        imagePullPolicy: "{{ .Values.compliance.image.pullPolicy }}"
+        imagePullPolicy: "{{ .Values.global.image.pullPolicy }}"
         resources:
         {{- toYaml .Values.compliance.resources | nindent 10 }}
         securityContext:

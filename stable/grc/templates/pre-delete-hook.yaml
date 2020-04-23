@@ -60,7 +60,7 @@ spec:
       containers:
       - name: pre-delete-job
         image: {{ .Values.global.imageOverrides.mcm_compliance }}
-        imagePullPolicy: "{{ .Values.compliance.image.pullPolicy }}"
+        imagePullPolicy: "{{ .Values.global.image.pullPolicy }}"
         resources:
         {{- toYaml .Values.compliance.resources | nindent 10 }}
         securityContext:
