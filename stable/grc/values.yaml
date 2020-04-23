@@ -11,8 +11,7 @@ global:
     mcm_compliance: ""
     grc_ui: ""
     grc_ui_api: ""
-  image:
-    pullPolicy: Always
+  pullPolicy: Always
   
 
 arch:

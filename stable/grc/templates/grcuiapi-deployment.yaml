@@ -60,7 +60,7 @@ spec:
       containers:
       - name: grc-ui-api
         image: {{ .Values.global.imageOverrides.grc_ui_api }}
-        imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+        imagePullPolicy: {{ .Values.global.pullPolicy }}
         resources:
         {{- toYaml .Values.grcuiapi.resources | nindent 10 }}
         securityContext:
