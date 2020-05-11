@@ -61,7 +61,7 @@ spec:
         image: {{ .Values.global.imageOverrides.governance_policy_propagator}}
         imagePullPolicy: "{{ .Values.global.pullPolicy }}"
         resources:
-        {{- toYaml .Values.compliance.resources | nindent 10 }}
+        {{- toYaml .Values.governance.resources | nindent 10 }}
         securityContext:
           privileged: false
           readOnlyRootFilesystem: true

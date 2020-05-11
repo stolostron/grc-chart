@@ -19,7 +19,7 @@ nodeSelector:
   customLabelSelector: ""
   customLabelValue: ""
 
-compliance:
+governance:
   resources:
     requests:
       memory: "64Mi"
