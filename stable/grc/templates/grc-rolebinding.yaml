@@ -16,7 +16,7 @@ metadata:
     helm.sh/chart: {{ template "grc.chart" . }}
 roleRef:
   kind: ClusterRole
-  name: {{ .Release.Name }}-grc-rrole
+  name: {{ .Release.Name }}-grc-role
   apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: ServiceAccount
