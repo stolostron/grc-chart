@@ -58,7 +58,7 @@ spec:
           effect: NoSchedule
       containers:
       - name: governance-policy-propagator
-        image: {{ .Values.global.imageOverrides.mcm_compliance}}
+        image: {{ .Values.global.imageOverrides.governance_policy_propagator}}
         imagePullPolicy: "{{ .Values.global.pullPolicy }}"
         resources:
         {{- toYaml .Values.compliance.resources | nindent 10 }}

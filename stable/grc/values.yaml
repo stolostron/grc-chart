@@ -1,7 +1,7 @@
 # Copyright (c) 2020 Red Hat, Inc.
 global:
   imageOverrides:
-    mcm_compliance: ""
+    governance_policy_propagator: ""
     grc_ui: ""
     grc_ui_api: ""
   pullPolicy: Always
