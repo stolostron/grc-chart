@@ -1,7 +1,4 @@
-# Licensed Materials - Property of IBM
-# (C) Copyright IBM Corporation 2019 All Rights Reserved
-# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
-
+# Copyright (c) 2020 Red Hat, Inc.
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -35,8 +32,6 @@ spec:
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/name: {{ template "grc.name" . }}
         helm.sh/chart: {{ template "grc.chart" . }}
-      annotations:
-        seccomp.security.alpha.kubernetes.io/pod: docker/default
     spec:
       serviceAccountName: {{ .Release.Name }}-grc-sa
       hostNetwork: false
@@ -55,16 +50,36 @@ spec:
                 {{- range .Values.arch }}
                 - {{ . }}
                 {{- end }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 70
+            podAffinityTerm:
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - governance-policy-propagator
+          - weight: 35
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - governance-policy-propagator
       tolerations:
         - key: dedicated
           operator: Exists
           effect: NoSchedule
       containers:
-      - name: policy-propagator-controller
-        image: {{ .Values.global.imageOverrides.mcm_compliance}}
+      - name: governance-policy-propagator
+        image: {{ .Values.global.imageOverrides.governance_policy_propagator}}
         imagePullPolicy: "{{ .Values.global.pullPolicy }}"
         resources:
-        {{- toYaml .Values.compliance.resources | nindent 10 }}
+        {{- toYaml .Values.governance.resources | nindent 10 }}
         securityContext:
           privileged: false
           readOnlyRootFilesystem: true
@@ -73,13 +88,22 @@ spec:
           capabilities:
             drop:
             - ALL
-        command: ["policy-propagator-controller"]
-        args:
-          - "-logtostderr=true"
-          - "-v=5"
-          {{- if gt .Values.replicas 1.0 }}
-          - "-leaderElect=true"
-          {{- end }}
+        command: ["governance-policy-propagator"]
+        env:
+          - name: WATCH_NAMESPACE
+            value: ""
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: OPERATOR_NAME
+            value: "governance-policy-propagator"
+        # args:
+        #   - "-logtostderr=true"
+        #   - "-v=5"
+        #   {{- if gt .Values.replicas 1.0 }}
+        #   - "-leaderElect=true"
+        #   {{- end }}
         livenessProbe:
           exec:
             command:
@@ -102,12 +126,7 @@ spec:
       imagePullSecrets:
       - name: {{ .Values.pullSecret }}
       {{- end }}
-      {{- if .Values.nodeSelector.enabled }}
+      {{- with .Values.hubconfig.nodeSelector }}
       nodeSelector:
-      {{- if .Values.nodeSelector.os }}
-        "beta.kubernetes.io/os" : {{ .Values.nodeSelector.os }}
-      {{- end }}
-      {{- if .Values.nodeSelector.customLabelSelector }}
-        {{ .Values.nodeSelector.customLabelSelector }} : {{ .Values.nodeSelector.customLabelValue}}
-      {{- end }}
+      {{ toYaml . | indent 8 }}
       {{- end }}

@@ -1,18 +1,10 @@
-# Licensed Materials - Property of IBM
-# (C) Copyright IBM Corporation 2016, 2020 All Rights Reserved
-# US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
-
-# Default values for hybrid-cluster-manager-chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
+# Copyright (c) 2020 Red Hat, Inc.
 global:
   imageOverrides:
-    mcm_compliance: ""
+    governance_policy_propagator: ""
     grc_ui: ""
     grc_ui_api: ""
   pullPolicy: Always
-  
 
 arch:
   - amd64
@@ -20,13 +12,8 @@ arch:
   - s390x
 replicas: 1
 pullSecret: null
-nodeSelector:
-  enabled: false
-  os: ""
-  customLabelSelector: ""
-  customLabelValue: ""
 
-compliance:
+governance:
   resources:
     requests:
       memory: "64Mi"
@@ -41,3 +28,6 @@ grcuiapi:
     requests:
       memory: "256Mi"
       cpu: "50m"
+
+hubconfig:
+  nodeSelector: null
