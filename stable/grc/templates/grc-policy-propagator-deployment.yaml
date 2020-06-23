@@ -98,12 +98,6 @@ spec:
                 fieldPath: metadata.name
           - name: OPERATOR_NAME
             value: "governance-policy-propagator"
-        # args:
-        #   - "-logtostderr=true"
-        #   - "-v=5"
-        #   {{- if gt .Values.hubconfig.replicaCount 1.0 }}
-        #   - "-leaderElect=true"
-        #   {{- end }}
         livenessProbe:
           exec:
             command:
