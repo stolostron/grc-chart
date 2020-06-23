@@ -14,7 +14,7 @@ metadata:
     app.kubernetes.io/name: {{ template "grc.name" . }}
     helm.sh/chart: {{ template "grc.chart" . }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.hubconfig.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "grc.name" . }}
@@ -101,7 +101,7 @@ spec:
         # args:
         #   - "-logtostderr=true"
         #   - "-v=5"
-        #   {{- if gt .Values.replicas 1.0 }}
+        #   {{- if gt .Values.hubconfig.replicaCount 1.0 }}
         #   - "-leaderElect=true"
         #   {{- end }}
         livenessProbe:
