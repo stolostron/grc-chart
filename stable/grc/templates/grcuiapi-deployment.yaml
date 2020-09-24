@@ -55,7 +55,7 @@ spec:
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 70
             podAffinityTerm:
-              topologyKey: 
+              topologyKey: topology.kubernetes.io/zone
               labelSelector:
                 matchExpressions:
                 - key: app
