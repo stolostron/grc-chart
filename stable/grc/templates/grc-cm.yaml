@@ -1,24 +1,19 @@
-# Copyright (c) 2020 Red Hat, Inc.
+# Copyright Contributors to the Open Cluster Management project
 
-apiVersion: certmanager.k8s.io/v1alpha1
-kind: Certificate
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: {{ template "grc.fullname" . }}-ca-cert
+  name: grc-ca-bundle
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ template "grc.name" . }}
     chart: {{ template "grc.chart" . }}
+    component: "ocm-grc-sa"
     release: {{ .Release.Name }}
-    component: "ocm-grcuiapi"
     heritage: {{ .Release.Service }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/name: {{ template "grc.name" . }}
     helm.sh/chart: {{ template "grc.chart" . }}
-spec:
-  secretName: {{ .Release.Name }}-grc-secrets
-  issuerRef:
-    name: multicluster-hub-mcm-server-ca-issuer
-    kind: Issuer
-  commonName: {{ template "grc.fullname" . }}
-  organization:
-  - Red Hat
+  annotations:
+    service.beta.openshift.io/inject-cabundle: "true"
