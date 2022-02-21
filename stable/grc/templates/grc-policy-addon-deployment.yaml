@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-policy-propagator
+  name: {{ .Release.Name }}-policy-addon-controller
   labels:
     app: {{ template "grc.name" . }}
     chart: {{ template "grc.chart" . }}
@@ -102,6 +102,12 @@ spec:
           capabilities:
             drop:
             - ALL
+        volumeMounts:
+        - name: tmp
+          mountPath: "/tmp"
+      volumes:
+      - name: tmp
+        emptyDir: {}
       terminationGracePeriodSeconds: 10
       {{- if .Values.pullSecret }}
       imagePullSecrets:
