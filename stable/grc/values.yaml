@@ -12,8 +12,6 @@ global:
     governance_policy_spec_sync: ""
     governance_policy_status_sync: ""
     governance_policy_template_sync: ""
-    grc_ui: ""
-    grc_ui_api: ""
     kube_rbac_proxy: ""
   pullPolicy: IfNotPresent
 
@@ -29,16 +27,6 @@ governance:
     requests:
       memory: "64Mi"
       cpu: "25m"
-grcui:
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "100m"
-grcuiapi:
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "50m"
 
 hubconfig:
   nodeSelector: null
